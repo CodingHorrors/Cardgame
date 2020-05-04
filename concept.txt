@@ -1,0 +1,87 @@
+-player x plays 7
+-check if next player has a 7
+-if he dont, that player draws 2
+-if he does, let him play the 7
+-then go to next player and repreat the process
+
+play x draws 4 cards
+stack has only 2 left
+player x draws 2 last cards
+stack gets reshuffled as new deck
+top card becomes new stack
+player draws 2 more cards from new deck
+
+
+play_stack got turned into a string somewhere
+
+ass runde:
+player plays an ace
+program asks player if he wants to start an ace round
+if player answers yes, ace round = True
+during ace round, only aces can be played. if player has no aces, he must draw
+cards
+ace round ends when all aces are on the stack
+to be tracked: aces on the stack
+to do:
+check if a current player has aces in his hand
+ony validate played aces
+
+Score tracking system:
+function that tracks the score:
+-create a score file:
+  score
+-ask the player if he wants to track the score
+-ask which player gets which name
+-use those names in the score file
+-create an own menu for score system with multiple options:
+	-open score file (here in read only!)/display the score in powershell
+  check if file already exists and create new if not
+	-reset score and/or names
+	-add names of players
+	-delete names
+
+actual procedure:
+-greeting message followed by a menu with options:
+  -start a new game with score tracking
+    -option to use last player count and names
+    -else ask for player count and which player has which name
+    (option to create new player)
+  -start a new game without tracking
+
+  -highscores
+    see above
+  -exit the game
+
+
+
+features still missing:
+-9 (change direction) DONE
+-10 wish for certain suit DONE
+-ass runde DONE
+-keeping score
+-asking the user if he wants to play another round
+-maybe language selection
+
+to do:
+When ace round: Check if player has aces in hand and force him to play them. DONE
+
+check if player can play a valid card and force him to play if he has one. DONE
+
+clean up the code of number 7 in function special_cards. Very certain that this can be done with a similar solution
+as with ace round
+
+
+BUG: Player 3 cant play his ace "ace of diamonds of player 2. seems to return false to validated, always goes to illegal
+move else.
+Fixed:  "2" was being interpreted as the card value.
+
+BUG: ace round was always in effect, even when player chose No.
+Fixed: 0 and 1 were interpreted as boolean by python
+
+BUG: While ace round is in effect and function empty_stack gets called, player 2 (most likely doesnt matter which
+player) draws wrong card (an ace) and the new deck has one card too many. stack is correct.
+FIXED: modifying a list while iterating over it doesnt work as intended. changed .remove() with .append() on a new
+list.
+
+"""TO TEST: Is cards_left properly tracked if index error occurs after try block was already executed?"""
+result: Yes, after adding a break statement in line 235 (except IndexError block)
